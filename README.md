@@ -66,7 +66,7 @@ json represtation of osgi factory configuration object
 ```
 
 
-### Erros
+### Errors
 if `type` parameter is missing  
 ````js
 "type parameter is missing"
