@@ -20,8 +20,10 @@ URL - http://host:port/bin/api/osgi-config.json
 - http://localhost:4504/bin/api/osgi-config.json?type=pid&q=org.apache.sling.security.impl.ReferrerFilter
 - http://localhost:4504/bin/api/osgi-config.json?type=fid&q=org.apache.sling.commons.log.LogManager.factory.config
 
-### Json output
-It contains array of config objects
+## Json output
+JSON output contain array of config objects.
+
+json represtation of osgi configuration object
 ```js
 {
     "pid": "org.apache.sling.security.impl.ReferrerFilter",
@@ -45,7 +47,7 @@ It contains array of config objects
   }
 ```
 
-Factory configuration
+json represtation of osgi factory configuration object
 ``` js
 {
     "pid": "org.apache.sling.commons.log.LogManager.factory.config.ef61ce8d-cf4f-410b-9eb5-b1d629161880",
@@ -62,6 +64,29 @@ Factory configuration
     }
   }
 ```
+
+
+### Erros
+if `type` parameter is missing  
+````js
+"type parameter is missing"
+````
+
+if `q` parameter is missing  
+````js
+"q parameter is missing"
+````
+
+if `type` parameter is value not correct  
+````js
+"invalid type paramaeter value. It should be 'pid' or 'fid'"
+````
+
+### No results
+if no configuration is found  
+````js
+"No configuration found for this request"
+````
 
 # POM Gson dependency
 ````xml
