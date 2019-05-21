@@ -20,7 +20,7 @@ URL - http://host:port/bin/api/osgi-config.json
 - http://localhost:4504/bin/api/osgi-config.json?type=pid&q=org.apache.sling.security.impl.ReferrerFilter
 - http://localhost:4504/bin/api/osgi-config.json?type=fid&q=org.apache.sling.commons.log.LogManager.factory.config
 
-## Json output
+## JSON Output
 JSON output contain array of config objects.
 
 json represtation of osgi configuration object
