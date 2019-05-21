@@ -22,7 +22,6 @@ import com.acc.aem64.core.pojo.OsgiConfigPojo;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-
 @Component(service = Servlet.class, property = { Constants.SERVICE_DESCRIPTION + "=API to get osgi config",
 		"sling.servlet.methods=" + HttpConstants.METHOD_GET, "sling.servlet.paths=" + "/bin/api/osgi-config",
 		"sling.servlet.extensions=" + "json" })
@@ -36,42 +35,51 @@ public class OsgiConfigurationsServlet extends SlingSafeMethodsServlet {
 	@Override
 	protected void doGet(final SlingHttpServletRequest req, final SlingHttpServletResponse resp)
 			throws ServerException, IOException {
+		resp.setContentType("application/json");
+		PrintWriter pw = resp.getWriter();
+		Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 		try {
+			String q = req.getParameter("q");
+			String type = req.getParameter("type");
+			String filter = null;
+			boolean param = true;
+			String errMsg = "No result found, please check query parameters value";
 
-			PrintWriter pw = resp.getWriter();
-			Configuration[] configurations = null;
-			Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
-			List<OsgiConfigPojo> confObjList = new ArrayList<OsgiConfigPojo>();
-			
-			resp.setContentType("application/json");
-
-			String mode = req.getParameter("mode");
-			if (mode != null) {
-				String filter = null;
-				if (mode.equalsIgnoreCase("all")) {
-					configurations = configAdmin.listConfigurations(filter);
-				} else if (mode.equalsIgnoreCase("search") && req.getParameter("q") != null) {
-					String q = req.getParameter("q");
-					String type = req.getParameter("type");
-					if (type != null && type.equalsIgnoreCase("pid")) {
-						filter = "(service.pid=" + q + ")";
-					} else if (type != null && type.equalsIgnoreCase("fid")) {
-						filter = "(service.factoryPid=" + q + ")";
-					}
-					configurations = configAdmin.listConfigurations(filter);
+			if (q != null && type != null) {
+				if (type.equalsIgnoreCase("pid")) {
+					filter = "(service.pid=" + q + ")";
+				} else if (type.equalsIgnoreCase("fid")) {
+					filter = "(service.factoryPid=" + q + ")";
+				} else if (!(type.equalsIgnoreCase("pid") || type.equalsIgnoreCase("fid"))) {
+					param = false;
+					errMsg = "invalid type paramaeter value. It should be 'pid' or 'fid'";
 				}
+			} else if (q != null && type == null) {
+				param = false;
+				errMsg = "type parameter is missing";
+			} else if (q == null && type != null) {
+				param = false;
+				errMsg = "q parameter is missing";
 			}
 
-			if (configurations != null) {
-				confObjList = getConfigurations(configurations);
-				String jsonInString = gson.toJson(confObjList);
-				pw.print(jsonInString);
+			if (param) {
+				Configuration[] configurations = null;
+				List<OsgiConfigPojo> confObjList = new ArrayList<OsgiConfigPojo>();
+				configurations = configAdmin.listConfigurations(filter);
+				if (configurations != null) {
+					confObjList = getConfigurations(configurations);
+				}
+				if (confObjList.size() > 0) {
+					pw.write(gson.toJson(confObjList));
+				} else {
+					pw.write(gson.toJson(new String("No configuration found for this request")));
+				}
 			} else {
-				String jsonInString = gson.toJson(new String("Something is wrong..., Please check query string parameters"));
-				pw.print(jsonInString);
+				pw.write(gson.toJson(new String(errMsg)));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			pw.write(gson.toJson(new String(e.getMessage())));
 		} finally {
 			resp.getWriter().close();
 		}
