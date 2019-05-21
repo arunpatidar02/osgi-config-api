@@ -12,7 +12,8 @@ This is a rest API to access Apache Sling web console osgi configuration in AEM.
   
 ### Filtered Configuration
 URL - http://host:port/bin/api/osgi-config.json
-Parameters 
+
+***Parameters*** 
 - **type** - `pid` or `fid`
 - **q** - pid or factory pid 
 #### Example
