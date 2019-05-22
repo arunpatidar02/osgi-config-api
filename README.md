@@ -16,9 +16,9 @@ URL - http://host:port/bin/api/osgi-config.json
 ***Parameters*** 
 - **type** - `pid` or `fid`
 - **q** - pid or factory pid 
-#### Example
-- http://localhost:4504/bin/api/osgi-config.json?type=pid&q=org.apache.sling.security.impl.ReferrerFilter
-- http://localhost:4504/bin/api/osgi-config.json?type=fid&q=org.apache.sling.commons.log.LogManager.factory.config
+> Example - 
+> http://localhost:4504/bin/api/osgi-config.json?type=pid&q=org.apache.sling.security.impl.ReferrerFilter
+> http://localhost:4504/bin/api/osgi-config.json?type=fid&q=org.apache.sling.commons.log.LogManager.factory.config
 
 ## JSON Output
 JSON output contain array of config objects.
@@ -51,7 +51,7 @@ json represtation of osgi factory configuration object
 ``` js
 {
     "pid": "org.apache.sling.commons.log.LogManager.factory.config.ef61ce8d-cf4f-410b-9eb5-b1d629161880",
-    "fid": "org.apache.sling.commons.log.LogManager.factory.config",
+    "factoryPid": "org.apache.sling.commons.log.LogManager.factory.config",
     "bundleLocation": "slinginstall:<AEM-Intallation-DIR>\crx-quickstart\launchpad\startup\1\org.apache.sling.commons.log-5.1.0.jar",
     "changeCount": 1,
     "properties": {
