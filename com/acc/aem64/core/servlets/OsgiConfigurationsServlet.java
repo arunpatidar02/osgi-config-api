@@ -81,7 +81,7 @@ public class OsgiConfigurationsServlet extends SlingSafeMethodsServlet {
 			e.printStackTrace();
 			pw.write(gson.toJson(new String(e.getMessage())));
 		} finally {
-			resp.getWriter().close();
+			pw.close();
 		}
 	}
 
