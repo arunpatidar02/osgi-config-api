@@ -11,13 +11,13 @@ import org.osgi.service.cm.Configuration;
 public class OsgiConfigPojo {
 
     private String pid;
-    private String fid;
+    private String factoryPid;
     private String bundleLocation;
     private Long changeCount;
     private Map<String, Object> properties;
 	public OsgiConfigPojo(Configuration conf) {
 		this.pid = conf.getPid();
-		this.fid = conf.getFactoryPid();
+		this.factoryPid = conf.getFactoryPid();
 		this.bundleLocation=conf.getBundleLocation();
 		this.changeCount=conf.getChangeCount();
 		this.properties = getMap(conf.getProperties());
