@@ -1,6 +1,6 @@
 # Osgi Configuration API
 
-This is a rest based API to access Apache Sling web console osgi configuration in AEM.
+This is a restful API to access Apache Sling web console osgi configuration in AEM.
 
   - Allow to access all configurations
   - filter configuration based on pid
