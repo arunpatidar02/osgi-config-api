@@ -43,6 +43,11 @@ import com.day.cq.search.result.SearchResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * @author arunpatidar02
+ *
+ */
+
 @Component(service = Servlet.class, property = { Constants.SERVICE_DESCRIPTION + "=API to get osgi config",
 		"sling.servlet.methods=" + HttpConstants.METHOD_GET, "sling.servlet.paths=" + "/bin/api/osgiconfig",
 		"sling.servlet.extensions=" + "json" })
