@@ -131,7 +131,7 @@ if no configuration is found
 ````
 # Landing page
 I used this API to create a osgi config dashboard which display all modified osgi config without login to web console.
-You can find the package at `aem-tools-osgiconfig-1.zip`[https://github.com/arunpatidar02/osgi-config-api/blob/master/aem-tools-osgiconfig-1.zip] and please check https://aemlab.blogspot.com/2019/05/aem-osgi-config-tool.html[https://aemlab.blogspot.com/2019/05/aem-osgi-config-tool.html] to know more about this dashboard page.
+You can find the package `aem-tools-osgiconfig-1.zip` at https://github.com/arunpatidar02/osgi-config-api/blob/master/aem-tools-osgiconfig-1.zip and please check https://aemlab.blogspot.com/2019/05/aem-osgi-config-tool.html to know more about this dashboard page.
 
 # Limitations
 User must have read access at `/apps` and `/libs` in order to get respository based configurations. 
