@@ -129,10 +129,11 @@ if no configuration is found
 	<version>2.8.5</version>
 </dependency>
 ````
-# Landing page
+# OSGI Config Dashboard Page
 I used this API to create a osgi config dashboard which display all modified osgi config without login to web console.
 You can find the package `aem-tools-osgiconfig-1.zip` at https://github.com/arunpatidar02/osgi-config-api/blob/master/aem-tools-osgiconfig-1.zip and please check https://aemlab.blogspot.com/2019/05/aem-osgi-config-dashboard.html to know more about this dashboard page.
 
 # Limitations
 User must have read access at `/apps`, `/conf` and `/libs` in order to get respository based configurations. 
 Though this can be handle using service user and can be use in non prod publishers also with subservice session.
+check https://github.com/arunpatidar02/aem63app-repo/blob/master/java/SeesionInServletWithSubservice.java to know more about how to get sub service session in Servlet.
