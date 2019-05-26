@@ -44,7 +44,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * @author arun.patidar
+ * @author arunpatidar02
  *
  */
 @Component(service = Servlet.class, property = { Constants.SERVICE_DESCRIPTION + "=API to get osgi config",
