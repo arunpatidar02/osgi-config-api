@@ -5,25 +5,35 @@ This is a rest API to access Apache Sling web console osgi configuration in AEM.
   - Allow to access all configurations
   - filter configuration based on pid
   - filter configuration based on factory pid
+  - filter configuration based on repository configuration(**sling:OsgiConfig**) type
 
 # Uses
-### All Configuration
-  URL - http://host:port/bin/api/osgi-config.json
+### All Configurations
+  URL - http://host:port/bin/api/osgiconfig.json
   
-### Filtered Configuration
-URL - http://host:port/bin/api/osgi-config.json
+### All repository based Configurations
+  URL - http://host:port/bin/api/osgiconfig.json?repo=true
+  
+### All non repository based Configurations
+  URL - http://host:port/bin/api/osgiconfig.json?repo=false
+  
+### Filtered Configurations (Url + Parameters)
+URL - http://host:port/bin/api/osgiconfig.json
 
 ***Parameters*** 
-- **type** - `pid` or `fid`
+- **type** - `pid` or `fid`, specify the search for pid or factoryPid
 - **q** - pid or factory pid 
+- **repo** - `true` or `false`. Optional parameter is used to filter config based on their repository based config status
+
 > Example
-> - http://localhost:4504/bin/api/osgi-config.json?type=pid&q=org.apache.sling.security.impl.ReferrerFilter
-> - http://localhost:4504/bin/api/osgi-config.json?type=fid&q=org.apache.sling.commons.log.LogManager.factory.config
+> - http://localhost:4504/bin/api/osgiconfig.json?type=pid&q=org.apache.sling.security.impl.ReferrerFilter
+> - http://localhost:4504/bin/api/osgiconfig.json?type=fid&q=org.apache.sling.commons.log.LogManager.factory.config
+> - http://localhost:4504/bin/api/osgiconfig.json?type=fid&q=org.apache.sling.commons.log.LogManager.factory.config&repo=true
 
 ## JSON Output
 JSON output contain array of config objects.
 
-json represtation of osgi configuration object
+json representation of osgi configuration object
 ```js
 {
     "pid": "org.apache.sling.security.impl.ReferrerFilter",
@@ -47,12 +57,12 @@ json represtation of osgi configuration object
   }
 ```
 
-json represtation of osgi factory configuration object
+json representation of osgi factory configuration object
 ``` js
 {
     "pid": "org.apache.sling.commons.log.LogManager.factory.config.ef61ce8d-cf4f-410b-9eb5-b1d629161880",
     "factoryPid": "org.apache.sling.commons.log.LogManager.factory.config",
-    "bundleLocation": "slinginstall:<AEM-Intallation-DIR>\crx-quickstart\launchpad\startup\1\org.apache.sling.commons.log-5.1.0.jar",
+    "bundleLocation": "slinginstall:<AEM-installation-dir>\\crx-quickstart\\launchpad\\startup\\1\\org.apache.sling.commons.log-5.1.0.jar",
     "changeCount": 1,
     "properties": {
       "org.apache.sling.commons.log.names": [
@@ -65,6 +75,26 @@ json represtation of osgi factory configuration object
   }
 ```
 
+json representation of osgi factory configuration object for repository based config
+``` js
+{
+    "pid": "org.apache.sling.commons.log.LogManager.factory.config.2fa52a0a-6347-4556-b78f-f0effdd88a61",
+    "factoryPid": "org.apache.sling.commons.log.LogManager.factory.config",
+    "bundleLocation": "slinginstall:<AEM-installation-dir>\\crx-quickstart\\launchpad\\startup\\1\\org.apache.sling.commons.log-5.1.0.jar",
+    "changeCount": 1,
+    "properties": {
+      "org.apache.sling.commons.log.names": [
+        "com.acc.aem64"
+      ],
+      "org.apache.sling.commons.log.level": "debug",
+      "org.apache.sling.commons.log.pattern": "{0,date,yyyy-MM-dd HH:mm:ss.SSS} {4} [{3}] {5}",
+      "org.apache.sling.commons.log.file": "logs/project-AEM64App.log"
+    },
+    "repositoryPaths": [
+      "/apps/AEM64App/config/org.apache.sling.commons.log.LogManager.factory.config-AEM64App"
+    ]
+  }
+```
 
 ### Errors
 if `type` parameter is missing  
@@ -77,10 +107,13 @@ if `q` parameter is missing
 "q parameter is missing"
 ````
 
-if `type` parameter is value not correct  
+if `type` parameter value is not correct  
 ````js
 "invalid type paramaeter value. It should be 'pid' or 'fid'"
 ````
+
+> Note : if `repo` parameter value is not either `true` or `false`, then results will not be filtered based on `repo` param
+
 
 ### No results
 if no configuration is found  
