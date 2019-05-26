@@ -44,10 +44,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 /**
- * @author arunpatidar02
+ * @author arun.patidar
  *
  */
-
 @Component(service = Servlet.class, property = { Constants.SERVICE_DESCRIPTION + "=API to get osgi config",
 		"sling.servlet.methods=" + HttpConstants.METHOD_GET, "sling.servlet.paths=" + "/bin/api/osgiconfig",
 		"sling.servlet.extensions=" + "json" })
@@ -217,6 +216,7 @@ public class OsgiConfigurationsServlet extends SlingSafeMethodsServlet {
 		qmap.put("type", "sling:OsgiConfig");
 		qmap.put("group.1_group.1_path", "/libs/system");
 		qmap.put("group.1_group.2_path", "/apps");
+		qmap.put("group.1_group.3_path", "/conf");
 		qmap.put("group.1_group.p.or", "true");
 		qmap.put("p.limit", "-1");
 		Query query = queryBuilder.createQuery(PredicateGroup.create(qmap),
