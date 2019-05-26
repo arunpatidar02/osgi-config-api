@@ -131,7 +131,7 @@ if no configuration is found
 ````
 # Landing page
 I used this API to create a landing page to access osgi configs without login to web console.
-You can find the package at `aem-tools-osgiconfig-1.zip`[https://github.com/arunpatidar02/osgi-config-api/blob/master/aem-tools-osgiconfig-1.zip] and Please check to know more about this landing page tool.
+You can find the package at `aem-tools-osgiconfig-1.zip[https://github.com/arunpatidar02/osgi-config-api/blob/master/aem-tools-osgiconfig-1.zip]` and Please check to know more about this landing page tool.
 
 # Limitations
-User must have read access at /apps and /libs in order to get respository based configurations. Though this can be handle using service user. 
+User must have read access at `/apps` and `/libs` in order to get respository based configurations. Though this can be handle using service user. 
