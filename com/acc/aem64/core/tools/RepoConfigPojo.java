@@ -10,11 +10,10 @@ public class RepoConfigPojo {
 		this.pid = getPid(path);
 	}
 	public String getPid(String path){
-		String pid = "";
-		if(path.lastIndexOf("-")>0)
-	    	pid = path.substring(path.lastIndexOf("/")+1, path.indexOf("-"));
-	    else
-	    	pid = path.substring(path.lastIndexOf("/")+1);
+		String pid = path.substring(path.lastIndexOf("/")+1);
+		if(pid.indexOf("-")>0)
+	    	pid = pid.substring(0, pid.indexOf("-"));
+		
 		return pid; 
 	}
 	public String getPath() {
